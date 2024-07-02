@@ -39,4 +39,6 @@ export default async function setPFP() {
     image: image.data,
     token: process.env.SLACK_TOKEN,
   });
+
+  return slackRequest;
 }
