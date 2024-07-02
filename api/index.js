@@ -1,7 +1,5 @@
-const { WebClient } = require("@slack/web-api");
-const axios = require("axios").default;
-const dotenv = require("dotenv");
-dotenv.config();
+import { WebClient } from "@slack/web-api";
+import axios from "axios";
 
 const images = {
   morning:
@@ -12,10 +10,10 @@ const images = {
   evening:
     "https://i.pinimg.com/564x/d1/9e/be/d19ebe0590f313cd6ade19da320151f3.jpg",
   night:
-    "https://i.pinimg.com/564x/ae/0f/b5/ae0fb5afd183d634f5c77e167d303c10.jpg",
+    "https://i.pinimg.com/564x/dc/90/9c/dc909c5c6e5e70a8dcf625477270f095.jpg",
 };
 
-async function setPFP() {
+export default async function setPFP() {
   var hour = Math.floor(new Date().getHours() + 5.3);
   let image;
   if (5 < hour && hour < 12) {
@@ -35,17 +33,10 @@ async function setPFP() {
       responseType: "arraybuffer",
     });
   }
-  image = await axios.get(image, {
-    responseType: "arraybuffer",
-  });
+
   const client = new WebClient();
   const slackRequest = await client.users.setPhoto({
     image: image.data,
     token: process.env.SLACK_TOKEN,
   });
-}
-
-export default async function (req, res) {
-  await setPFP();
-  res.send("Started changing your profile picture");
 }
