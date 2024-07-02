@@ -7,16 +7,16 @@ import setPFP from "./api/index.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.get("/", () => {
+app.use("/", (req, res, next) => {
   console.log("welcome to Slack profile picture changer");
 });
 
-app.get("/api", async (req, res) => {
+app.use("/api", async (req, res, next) => {
   await setPFP();
   res.send("Started changing your PFP!");
 });
 
-app.get("*", (req, res) => {
+app.get("*", (req, res, next) => {
   console.log("No URL found");
 });
 
