@@ -14,6 +14,10 @@ app.use("/", (req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("Hello, We are like to help you!");
+});
+
 app.use("/api", indexRoutes);
 
 app.listen(PORT, () => {
