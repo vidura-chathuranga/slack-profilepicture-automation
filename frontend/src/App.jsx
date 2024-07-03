@@ -7,6 +7,7 @@ import torus from "./assets/torus.png";
 import icosahedron from "./assets/icosahedron.png";
 import loader from "./assets/loader.gif";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function App() {
   const [date, setDate] = useState(new Date());
@@ -22,16 +23,19 @@ function App() {
 
   const changeProfilePicture = async () => {
     try {
+      const id = toast.loading("Loading...");
       setLoading(true);
 
       const res = await axios.get("http://localhost:3000/api/change");
       if (!res.data.status) {
-        console.log("error");
+        toast.error("Internal server error");
       }
-      setLoading(false);
       setProfilePicture(res.data.pic);
+      setLoading(false);
+      toast.remove(id);
+      toast.success("Nice! You changed my profile pic..", { icon: "🔥" });
     } catch (error) {
-      console.log(error.message);
+      toast.error("Internal server error");
     }
   };
 
@@ -42,13 +46,13 @@ function App() {
         const res = await axios.get("http://localhost:3000/api/current");
 
         if (!res.data.status) {
-          console.log("error");
+          toast.error("Internal server error");
         }
 
         setLoading(false);
         setProfilePicture(res.data.pic);
       } catch (error) {
-        console.log(error.message);
+        toast.error("Internal server error");
       }
     };
 
