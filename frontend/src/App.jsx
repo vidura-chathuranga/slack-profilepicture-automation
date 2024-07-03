@@ -26,7 +26,7 @@ function App() {
       const id = toast.loading("Loading...");
       setLoading(true);
 
-      const res = await axios.get("http://localhost:3000/api/change");
+      const res = await axios.get("https://slack-profilepicture-automation-backend.vercel.app/api/change");
       if (!res.data.status) {
         toast.error("Internal server error");
       }
@@ -43,7 +43,7 @@ function App() {
     const fetchCurrentProfilePicture = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:3000/api/current");
+        const res = await axios.get("https://slack-profilepicture-automation-backend.vercel.app/api/current");
 
         if (!res.data.status) {
           toast.error("Internal server error");
