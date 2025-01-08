@@ -42,7 +42,7 @@ export const getCurrentPP = async (req, res) => {
 
     const slackRequest = await client.users.info({
       token: process.env.SLACK_TOKEN,
-      user: "U06PYD8HB4N",
+      user: process.env.USER_ID,
     });
 
     if (!slackRequest.ok) {
